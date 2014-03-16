@@ -16,6 +16,7 @@
         <h1>
           Glimpse
         </h1>
+        <button id="more">More Tweets</button>
       </div>
     </div>
   </div>
@@ -40,6 +41,10 @@
           index -= 1;
         }
 
+        var $button = $('#more');
+        $button.on('click', function() {
+          alert('yo');
+        });
       });
 
     </script>

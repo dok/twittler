@@ -32,19 +32,24 @@
         var $tweets = $('.tweets');
         $tweets.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($tweets);
-          index -= 1;
-        }
+        var index = 0;
+        var pullTweets = function() {
+          var currentTop = streams.home.length - 1;
+          while(index <= currentTop){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + index);
+            $tweet.prependTo($tweets);
+            index += 1;
+          }
+        };
 
         var $button = $('#more');
         $button.on('click', function() {
-          alert('yo');
+          pullTweets();
         });
+
+        pullTweets();
       });
 
     </script>

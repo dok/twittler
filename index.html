@@ -4,7 +4,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="public/css/base.css">
     <link rel="stylesheet" href="public/css/layout.css">
-    <script type="text/javascript" src="firebug-lite.js"></script>
+    <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -38,8 +38,19 @@
           while(index <= currentTop){
             var tweet = streams.home[index];
             var $tweet = $('<div></div>');
+            var $tweetAuth = $("<div class='author'></div>");
+            var $tweetDesc = $("<div class='description'></div>");
+            var $tweetTime = $("<span class='time'></span>");
+
             var date = new Date( tweet.created_at );
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() );
+            $tweetAuth.text('@' + tweet.user);
+            $tweetDesc.text(tweet.message);
+            $tweetTime.text(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() );
+
+            $tweetAuth.appendTo($tweet);
+            $tweetTime.appendTo($tweet);
+            $tweetDesc.appendTo($tweet);
+
             $tweet.prependTo($tweets);
             index += 1;
           }

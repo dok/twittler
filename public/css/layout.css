@@ -27,7 +27,16 @@ body {
   margin: 0 auto;
 }
 
-.tweets div {
+.header {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.header h2 {
+  float: left;
+  margin-right: 10px;
+}
+
+.tweets > div {
   float: left;
   height: 75px;
   width: 264px;
@@ -37,7 +46,20 @@ body {
   border-radius: 5px;
 }
 
+.author {
+  color: gray;
+  font-size: 110%;
+  float: left;
+}
 
+.description {
+  color: #fefefe;
+}
+
+.time {
+  margin-left: 5px;
+
+}
 /* #Page Styles
 ================================================== */
 

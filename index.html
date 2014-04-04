@@ -4,7 +4,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="public/css/base.css">
     <link rel="stylesheet" href="public/css/layout.css">
-    <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -32,25 +31,30 @@
         var $tweets = $('.tweets');
         $tweets.html('');
 
-        var index = 0;
-        var pullTweets = function() {
-          var currentTop = streams.home.length - 1;
-          while(index <= currentTop){
-            var tweet = streams.home[index];
+        var makeSingle = function(node) {
             var $tweet = $('<div></div>');
-            var $tweetAuth = $("<div class='author'></div>");
+            var $tweetAuth = $("<a href='#' class='author'></a>");
             var $tweetDesc = $("<div class='description'></div>");
             var $tweetTime = $("<span class='time'></span>");
 
-            var date = new Date( tweet.created_at );
-            $tweetAuth.text('@' + tweet.user);
-            $tweetDesc.text(tweet.message);
+            var date = new Date( node.created_at );
+            $tweetAuth.text('@' + node.user);
+            $tweetDesc.text(node.message);
             $tweetTime.text(date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() );
 
             $tweetAuth.appendTo($tweet);
             $tweetTime.appendTo($tweet);
             $tweetDesc.appendTo($tweet);
 
+            return $tweet;
+        };
+
+        var index = 0;
+        var pullTweets = function() {
+          var currentTop = streams.home.length - 1;
+          while(index <= currentTop){
+            var tweet = streams.home[index];
+            var $tweet = makeSingle(tweet);
             $tweet.prependTo($tweets);
             index += 1;
           }
@@ -62,6 +66,25 @@
         });
 
         pullTweets();
+
+        $('.author').on('click', function() {
+          // Remove old box
+          $('.tweetBox').remove();
+
+          // Make new box
+          var name = $(this).text().substring(1);
+          console.log(name);
+          var timelineAry = streams.users[name];
+          var latestTen = [];
+          var $box = $("<div class='tweetBox'></div>");
+          for(var i = 0; i < timelineAry.length; i++) {
+            // latestTen.push(makeSingle(timelineAry[i]));
+            makeSingle(timelineAry[i]).appendTo($box);
+          }
+
+          $box.appendTo($('body'));
+        });
+
       });
 
     </script>

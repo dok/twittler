@@ -60,6 +60,21 @@ body {
   margin-left: 5px;
 
 }
+
+.tweetBox {
+  position: fixed;
+  background: white;
+  width: 500px;
+  height: 75%;
+  border-radius: 15px;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  padding: 25px;
+}
+
+.tweetBox .description {
+  color: black;
+}
 /* #Page Styles
 ================================================== */
 
